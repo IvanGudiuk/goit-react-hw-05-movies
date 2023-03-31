@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { fetchTrendingMovies } from '../services/fetchApi';
 import { MoviesList } from '../components/MoviesList/MoviesList';
-import Loader from '../components/Loader/Loader';
 
 function Home() {
   const [movies, setMovies] = useState([]);

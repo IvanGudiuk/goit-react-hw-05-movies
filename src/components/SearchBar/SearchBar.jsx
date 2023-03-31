@@ -9,10 +9,6 @@ export function SearchBar({ query }) {
   const handleInputChange = e => {
     const { value } = e.target;
     setValue(value);
-    if (value === '') {
-      return setSearchParams({});
-    }
-    setSearchParams({ query: value });
   };
 
   const handleSubmit = e => {

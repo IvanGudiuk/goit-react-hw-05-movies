@@ -3,7 +3,6 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { fetchQueryMovies } from '../services/fetchApi';
-import { Loader } from '../components/Loader/Loader';
 
 function Movies() {
   const [searchValue, setSearchValue] = useState('');
@@ -27,7 +26,7 @@ function Movies() {
       }
     }
     fetchData();
-  }, [searchValue]);
+  }, [queryString, searchValue]);
 
   function searchHandle(data) {
     setSearchValue(data);

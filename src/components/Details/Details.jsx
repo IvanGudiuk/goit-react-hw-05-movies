@@ -1,8 +1,6 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { BsArrowLeft } from 'react-icons/bs';
 import css from './Details.module.css';
-import { Suspense } from 'react';
-import { Loader } from 'components/Loader/Loader';
 
 export function Details({ data }) {
   const { poster_path, title, release_date, vote_average, overview, genres } =
@@ -51,9 +49,7 @@ export function Details({ data }) {
           </li>
         </ul>
       </section>
-      {/* <Suspense fallback={<Loader />}>
-        <Outlet />
-      </Suspense> */}
+      <Outlet />
     </>
   );
 }

@@ -3,7 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import Loader from 'components/Loader/Loader';
 import css from './Layout.module.css';
 
-function Layout() {
+export default function Layout() {
   return (
     <>
       <header className={css.header}>
@@ -40,4 +40,3 @@ function Layout() {
     </>
   );
 }
-export default Layout;
