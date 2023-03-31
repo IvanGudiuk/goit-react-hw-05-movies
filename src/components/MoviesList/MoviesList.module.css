@@ -1,0 +1,9 @@
+.title {
+  display: block;
+  margin-left: 40px;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}

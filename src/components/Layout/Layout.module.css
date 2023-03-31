@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid #ddd;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.header:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  border: none;
+}
+.link {
+  text-decoration: none;
+  color: black;
+}
+.active {
+  text-decoration: none;
+  color: tomato;
+}
