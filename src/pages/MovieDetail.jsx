@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Suspense, useEffect, useState } from 'react';
+import { Outlet, useParams } from 'react-router-dom';
 import { fetchMovieDetails } from '../services/fetchApi';
 import { Details } from '../components/Details/Details';
+import Loader from '../components/Loader/Loader';
 
 function MovieDetail() {
   const [movie, setMovie] = useState(null);
   const { movieId } = useParams();
-  console.log(movieId);
+
   useEffect(() => {
     async function fetchData() {
       try {
@@ -16,11 +17,21 @@ function MovieDetail() {
         console.log('Error fetching data:', error);
       }
     }
-
     fetchData();
   }, [movieId]);
 
-  return <Details data={movie} />;
+  if (!movie) {
+    return <></>;
+  }
+
+  return (
+    <>
+      <Details data={movie} />;
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
+    </>
+  );
 }
 
 export default MovieDetail;

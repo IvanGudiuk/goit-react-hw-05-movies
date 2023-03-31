@@ -1,22 +1,28 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
-// import { BsArrowLeft } from 'react-icons/bs';
+import { BsArrowLeft } from 'react-icons/bs';
 import css from './Details.module.css';
+import { Suspense } from 'react';
+import { Loader } from 'components/Loader/Loader';
 
 export function Details({ data }) {
   const { poster_path, title, release_date, vote_average, overview, genres } =
     data;
   const rating = Math.round(vote_average * 10) + '%';
-  const genresList = genres.map(genre => genre.name).join('');
+  const genresList = genres.map(genre => genre.name).join(' ');
   const year = release_date.split('-')[0];
   const location = useLocation();
+  const from = location.state.from;
 
   return (
     <>
       <section>
-        {/* <BsArrowLeft /> */}
-        <Link to={location?.state?.from ?? '/'}>Go back</Link>
+        <Link to={location?.state?.from ?? '/'} className={css.link}>
+          <BsArrowLeft />
+          Go back
+        </Link>
         <div className={css.wrapper}>
           <img
+            className={css.image}
             src={`https://image.tmdb.org/t/p/w200/${poster_path}`}
             alt={title}
           />
@@ -30,18 +36,24 @@ export function Details({ data }) {
           </div>
         </div>
       </section>
-      <section>
+      <section className={css.add}>
         <p className={css.text}>Additional information</p>
         <ul className={css.list}>
           <li className={css.item}>
-            <Link to="cast">Cast</Link>
+            <Link to="cast" state={{ from }}>
+              Cast
+            </Link>
           </li>
           <li className={css.item}>
-            <Link to="reviews">Reviews</Link>
+            <Link to="reviews" state={{ from }}>
+              Reviews
+            </Link>
           </li>
         </ul>
       </section>
-      <Outlet />
+      {/* <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense> */}
     </>
   );
 }

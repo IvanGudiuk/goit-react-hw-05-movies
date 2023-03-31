@@ -1,21 +1,26 @@
 import { useState, useEffect } from 'react';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { fetchQueryMovies } from '../services/fetchApi';
+import { Loader } from '../components/Loader/Loader';
 
 function Movies() {
   const [searchValue, setSearchValue] = useState('');
   const [movies, setMovies] = useState([]);
-
-  function searchHandle(data) {
-    setSearchValue(data);
-  }
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
+  const queryString = searchParams.get('query');
 
   useEffect(() => {
     async function fetchData() {
       try {
-        if (!searchValue.trim()) return;
-        const data = await fetchQueryMovies(searchValue);
+        let data;
+        if (!searchValue && queryString) {
+          data = await fetchQueryMovies(queryString);
+        } else {
+          data = await fetchQueryMovies(searchValue);
+        }
         setMovies([...data]);
       } catch (error) {
         console.log('Error fetching data:', error);
@@ -24,10 +29,14 @@ function Movies() {
     fetchData();
   }, [searchValue]);
 
+  function searchHandle(data) {
+    setSearchValue(data);
+  }
+
   return (
     <>
       <SearchBar query={searchHandle} />
-      <MoviesList data={movies} reference="/movies" />
+      <MoviesList data={movies} location={location} />
     </>
   );
 }

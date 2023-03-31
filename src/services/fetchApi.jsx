@@ -27,7 +27,7 @@ export const fetchQueryMovies = async query => {
 
 export const fetchMovieDetails = async id => {
   const result = await fetch(
-    `${BASE_URL}${END_POINTS.movieDetails}/${id}?api_key=${API_KEY}`
+    `${BASE_URL}${END_POINTS.movieDetails}/${id}?api_key=${API_KEY}&language=en-US`
   );
   const data = await result.json();
   return data;

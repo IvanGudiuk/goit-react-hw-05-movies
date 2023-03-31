@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { fetchTrendingMovies } from '../services/fetchApi';
 import { MoviesList } from '../components/MoviesList/MoviesList';
+import Loader from '../components/Loader/Loader';
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -17,7 +18,11 @@ function Home() {
     fetchData();
   }, []);
 
-  return <MoviesList data={movies} title={'Trending today'} reference="/" />;
+  return (
+    <>
+      <MoviesList data={movies} title={'Trending today'} />
+    </>
+  );
 }
 
 export default Home;

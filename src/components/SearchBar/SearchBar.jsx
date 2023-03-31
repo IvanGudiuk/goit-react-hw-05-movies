@@ -18,9 +18,10 @@ export function SearchBar({ query }) {
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.currentTarget;
-    const inputValue = form.elements.search.value;
-    query(inputValue);
-    form.reset();
+    const string = form.elements.search.value;
+    query(string);
+    setValue('');
+    if (searchParams) setSearchParams({ query: string });
   };
 
   return (
@@ -32,7 +33,7 @@ export function SearchBar({ query }) {
           onChange={handleInputChange}
           name="search"
         />
-        <button className={css.btn} type="submit">
+        <button className={css.btn} type="submit" disabled={!value}>
           Search
         </button>
       </form>
